@@ -1,7 +1,6 @@
 # Tempest CAX 2026 ROM set
 
-This is the built `cax2026` hacked ROM set for the `tempest3` MAME driver
-(Tempest, rev 3 revision). It contains:
+This is the `cax2026` modified ROM set for Atari's arcade game TEMPEST.
 
 - `tempest3.zip` — MAME-ready ROM archive (20 chip files, standard
   `tempest3` naming/layout).
@@ -13,19 +12,16 @@ This is the built `cax2026` hacked ROM set for the `tempest3` MAME driver
 Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o&t=11s
 
 - Purple levels beyond green — level families extend past L96 into a
-  new purple range instead of stopping there.
-- 7-digit scoring (stock Tempest tops out at 6 digits).
+  new purple range. Purple levels are even harder than green.
+- 7-digit scoring (stock Tempest is limited to 6 digits).
 - Start on any level L1-L112, with the corresponding start-of-level
-  bonus scaled up to 1,410,000 (1410K) for the highest levels.
-- Last-level-reached is preserved per entry in the high score table,
-  not just the score.
+  bonus scaled up to 1,410,000 (1410K).
+- Last-level-reached is displayed for each entry in the high score table.
 
 ### Self-test disabled
 
-This build disables the cabinet/service-menu self-test mode. Its code
-was overwritten to reclaim ROM space needed for the mods above — there
-wasn't enough free space otherwise, so self-test was sacrificed to make
-room.
+This build disables the cabinet/service-menu self-test mode. That code
+was overwritten to reclaim ROM space needed for the new mods.
 
 ## Running in MAME
 
@@ -44,12 +40,6 @@ via `-rompath`, and you invoke the driver as `tempest3`.
    Replace `C:\path\to\tempest-cax-2026` with wherever this directory
    lives, and `mame.exe` with the full path to your MAME executable if
    it's not on your `PATH`.
-
-3. Useful extra flags:
-   - `-window` — run windowed instead of fullscreen.
-   - `-skip_gameinfo` — skip the info/warnings splash screen.
-   - `-nothrottle` — uncap emulation speed (for automated testing, not
-     normal play).
 
 ### Alternative: drop into MAME's own rom folder
 
