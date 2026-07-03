@@ -73,10 +73,10 @@ mame.exe tempest3
 
 ### Notes
 
-- This is a hacked/patched ROM set (not the stock Atari Tempest program
-  ROMs) — expect gameplay behavior (scoring, levels, colors, etc.) to
-  differ from the original arcade release.
-- The individual chip files are provided only for inspection/repacking;
-  MAME itself only needs `tempest3.zip`.
+- In the purple levels, the player receives an additional full-strength
+  superzapper. So, three total: two full-strength zaps plus one "most
+  dangerous enemy" zap.
+- The individual chip files are provided for burning individual EPROMs.
+  MAME itself only needs the ZIP archive `tempest3.zip`.
 - This build disables the cabinet/service-menu self-test mode — that
-  code was overwritten to reclaim ROM space needed for the mods above.
+  code was overwritten to reclaim ROM space needed for the mods.
