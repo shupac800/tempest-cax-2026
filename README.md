@@ -8,6 +8,25 @@ This is the built `cax2026` hacked ROM set for the `tempest3` MAME driver
 - `136002-*.d1/.e1/.f1/...` — the same 20 chip images, unzipped, in case
   you need to inspect or re-pack individual files.
 
+## What this build does
+
+Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o&t=11s
+
+- Purple levels beyond green — level families extend past L96 into a
+  new purple range instead of stopping there.
+- 7-digit scoring (stock Tempest tops out at 6 digits).
+- Start on any level L1-L112, with the corresponding start-of-level
+  bonus scaled up to 1,410,000 (1410K) for the highest levels.
+- Last-level-reached is preserved per entry in the high score table,
+  not just the score.
+
+### Self-test disabled
+
+This build disables the cabinet/service-menu self-test mode. Its code
+was overwritten to reclaim ROM space needed for the mods above — there
+wasn't enough free space otherwise, so self-test was sacrificed to make
+room.
+
 ## Running in MAME
 
 MAME identifies ROM sets by the **driver/shortname**, not the zip's file
