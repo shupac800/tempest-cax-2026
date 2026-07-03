@@ -10,7 +10,7 @@ This is the `cax2026` modified ROM set for Atari's arcade game TEMPEST.
 
 ## What this build does
 
-Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o&t=11s
+Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o
 
 - Purple levels beyond green — level families extend past L96 into a
   new purple range. Purple levels are even harder than green.
