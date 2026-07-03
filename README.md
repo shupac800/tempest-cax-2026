@@ -14,6 +14,12 @@ Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o
 
 - Purple levels beyond green — level families extend past L96 into a
   new purple range. Purple levels are even harder than green.
+  (Note: Tempest's color hardware (AVG `colorram` decode) drives each of
+  R/G/B as an on/off bit, not a variable level — the 8 producible hues
+  are black/blue/red/magenta/green/cyan/yellow/white. Orange isn't
+  reachable this way, since it needs a partial-intensity green the
+  hardware can't generate; that's a discrete design constraint, not
+  something a future ROM patch could add.)
 - 7-digit scoring (stock Tempest is limited to 6 digits).
 - Start on any level L1-L112, with the corresponding start-of-level
   bonus scaled up to 1,410,000 (1410K).
