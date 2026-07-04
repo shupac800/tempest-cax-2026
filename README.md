@@ -8,6 +8,17 @@ This is the `cax2026` modified ROM set for Atari's arcade game TEMPEST.
    can be burned onto a 2716 EPROM and installed into an original Tempest 
    main board.
 
+## Compatibility
+
+This patch set is designed for the Atari Tempest Rev 3 ROM set
+(`tempest3`). The patched ROMs need to be used with a matched Rev 3 set of
+EPROMs and PROMs. Mixing these patched ROMs with Rev 1 or Rev 2 ROMs,
+PROMs, or other patched sets should be expected not to work.
+
+It is fine to use these images on a board jumpered for 2716 EPROMs rather
+than 2732 EPROMs, provided all installed EPROMs and PROMs are the Rev 3
+parts.
+
 ## What this build does
 
 Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o
