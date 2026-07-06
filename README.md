@@ -35,6 +35,37 @@ Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o
 - Start on any level L1-L112, with the corresponding start-of-level
   bonus scaled up to 1,410,000 (1410K).
 - Last-level-reached is displayed for each entry in the high score table.
+- Attract-mode no-death, selectable by DIP switch (see below).
+
+## Attract-mode no-death (DIP switch L12:8)
+
+This build adds an optional mode in which the demo/CPU player cannot die
+**while the game is in attract (demo) mode** — the attract game keeps
+running instead of ending on a hit. It has **no effect on real
+gameplay**; a paying player dies exactly as in stock Tempest.
+
+The option is controlled by **DIP switch L12 position 8** (the DSW2 bit 0
+location on the Tempest main board):
+
+| L12:8    | Attract-mode no-death |
+|----------|-----------------------|
+| **ON**   | Enabled — attract player cannot die |
+| OFF      | Disabled — attract deaths behave like stock |
+
+This DIP location is **active-low**, so "ON" corresponds to the switch's
+raw-clear state (the same physical position that stock Tempest uses for
+1-credit minimum). If the mode does not appear to engage, flip L12:8 to
+its other position.
+
+**Important — this switch no longer selects "2 credit minimum."** To make
+room for the mode, this build repurposes L12:8 and removes the original
+2-credit-minimum feature entirely: regardless of the switch position, the
+game behaves as 1-credit minimum and the "2 CREDIT MINIMUM / INSERT COINS"
+attract messaging is gone. The switch's *only* function on this ROM set is
+the attract-mode no-death toggle above.
+
+In MAME, set this from the in-game **Dip Switches** menu (Tab → Dip
+Switches) rather than a physical switch.
 
 ## Burning EPROMs
 
