@@ -36,6 +36,29 @@ Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o
   bonus scaled up to 1,410,000 (1410K).
 - Last-level-reached is displayed for each entry in the high score table.
 - Attract-mode no-death, selectable by DIP switch (see below).
+- All DIP difficulty settings are safe on all levels (see below).
+
+## Hard-difficulty fix (July 2026 revision)
+
+Revisions of this ROM set prior to July 2026 could soft-lock on **Hard**
+difficulty at level 96 and above (including every purple level): once the
+last enemy died, the level never ended and the game sat waiting for
+enemies that would never spawn, in both attract mode and real gameplay.
+
+The cause is a latent bug in stock Tempest, not something this build
+introduced: on Hard, the game boosts each wave's enemy count *after* the
+per-level data is loaded, with no upper bound, and any count above 64
+overflows the game's 64-slot enemy-spawn array — the wave's
+enemies-remaining counter can then never reach zero. Stock Rev 3 has
+enemy counts of 58-61 at L96-L99, so an unmodified board on Hard would
+hang there too; this build's extended levels (and its attract mode, which
+can demo any level) simply made the bug much easier to encounter.
+
+The current revision clamps the Hard-difficulty boost to the 64-enemy
+array limit. Counts of 64 and below are untouched (byte-identical
+behavior to stock), and Easy/Medium settings were never affected. If your
+chips were burned from a pre-July-2026 revision, reburn **D1**
+(`136002-113.d1`) and **R1** (`136002-222.r1`) to pick up the fix.
 
 ## Attract-mode no-death (DIP switch L12:8)
 
