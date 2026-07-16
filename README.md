@@ -60,6 +60,25 @@ behavior to stock), and Easy/Medium settings were never affected. If your
 chips were burned from a pre-July-2026 revision, reburn **D1**
 (`136002-113.d1`) and **R1** (`136002-222.r1`) to pick up the fix.
 
+## Hard-difficulty spiker-speed fix (July 2026 revision 2)
+
+Revisions prior to this fix had near-stationary spikers on **Hard**
+difficulty at L101 and above (all but the first four purple levels), in
+attract mode and gameplay alike. The cause was an underflow in this
+build's own purple-level speed hook: on purple waves it computes the
+spiker speed as the enemy base speed minus 48, but Tempest stores speeds
+as a single byte meaning (byte − 256), always negative. Hard difficulty's
+stock 1/8 speed boost lowers the base-speed byte enough that subtracting
+48 more wraps the byte, turning an intended speed of about −280 into −2
+to −18 — a crawling spiker (Medium's spikers run −235 to −250 on the
+same waves).
+
+The fix clamps the computed spiker speed at −255, the fastest value a
+single speed byte can express. Non-underflowing cases (all of
+Easy/Medium, and Hard at L97–L100) are byte-identical to the previous
+revision. Only **R1** (`136002-222.r1`) changed; reburn it to pick up
+the fix.
+
 ## Attract-mode no-death (DIP switch L12:8)
 
 This build adds an optional mode in which the demo/CPU player cannot die
