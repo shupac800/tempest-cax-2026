@@ -38,9 +38,9 @@ Video walkthrough: https://www.youtube.com/watch?v=DEtjrcK1U0o
 - Attract-mode no-death, selectable by DIP switch (see below).
 - All DIP difficulty settings are safe on all levels (see below).
 
-## Hard-difficulty fix (July 2026 revision)
+## v1.1 — Hard-difficulty soft-lock fix (July 2026)
 
-Revisions of this ROM set prior to July 2026 could soft-lock on **Hard**
+Revisions of this ROM set prior to v1.1 could soft-lock on **Hard**
 difficulty at level 96 and above (including every purple level): once the
 last enemy died, the level never ended and the game sat waiting for
 enemies that would never spawn, in both attract mode and real gameplay.
@@ -57,27 +57,36 @@ can demo any level) simply made the bug much easier to encounter.
 The current revision clamps the Hard-difficulty boost to the 64-enemy
 array limit. Counts of 64 and below are untouched (byte-identical
 behavior to stock), and Easy/Medium settings were never affected. If your
-chips were burned from a pre-July-2026 revision, reburn **D1**
+chips were burned from a pre-v1.1 revision, reburn **D1**
 (`136002-113.d1`) and **R1** (`136002-222.r1`) to pick up the fix.
 
-## Hard-difficulty spiker-speed fix (July 2026 revision 2)
+## v1.2 — Hard-difficulty spiker-speed fix (July 2026)
 
-Revisions prior to this fix had near-stationary spikers on **Hard**
-difficulty at L101 and above (all but the first four purple levels), in
-attract mode and gameplay alike. The cause was an underflow in this
-build's own purple-level speed hook: on purple waves it computes the
-spiker speed as the enemy base speed minus 48, but Tempest stores speeds
-as a single byte meaning (byte − 256), always negative. Hard difficulty's
-stock 1/8 speed boost lowers the base-speed byte enough that subtracting
-48 more wraps the byte, turning an intended speed of about −280 into −2
-to −18 — a crawling spiker (Medium's spikers run −235 to −250 on the
-same waves).
+Revisions prior to v1.2 had near-stationary spikers on **Hard**
+difficulty on the even-numbered purple levels (L98, L100, ... L112), in
+attract mode and gameplay alike. Odd purple levels were unaffected: the
+game's base enemy speed alternates between two values by wave parity,
+and only the slower-parity value triggered the bug.
+
+The cause was an underflow in this build's own purple-level speed hook:
+on purple waves it computes the spiker speed as the enemy base speed
+minus 48, but Tempest stores speeds as a single byte meaning
+(byte − 256), always negative. Hard difficulty's stock 1/8 speed boost
+lowers the base-speed byte enough that subtracting 48 more wraps the
+byte, turning an intended speed of roughly −290 into −6 to −19 — a
+crawling spiker (Medium's spikers run −238 to −251 on the same levels).
 
 The fix clamps the computed spiker speed at −255, the fastest value a
 single speed byte can express. Non-underflowing cases (all of
-Easy/Medium, and Hard at L97–L100) are byte-identical to the previous
-revision. Only **R1** (`136002-222.r1`) changed; reburn it to pick up
-the fix.
+Easy/Medium, and Hard on odd purple levels) are byte-identical to the
+previous revision. Only **R1** (`136002-222.r1`) changed relative to
+v1.1; reburn it to pick up the fix. Coming from v1.0 or earlier, reburn
+both **D1** and **R1**.
+
+Following this fix, the wave-setup/difficulty system was audited by
+emulating the ROM's actual wave-setup code across all 112 levels on all
+three difficulty settings; no further overflow or underflow defects were
+found. See [v1.2_audit.md](v1.2_audit.md) for the full audit.
 
 ## Attract-mode no-death (DIP switch L12:8)
 
